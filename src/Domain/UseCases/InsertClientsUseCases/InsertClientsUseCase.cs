@@ -7,11 +7,10 @@ namespace Domain.UseCases.InsertClientsUseCases
 {
     public class InsertClientsUseCase : IInsertClientsUseCase
     {
-        private readonly string _queueName = "bank-credit-offer";
-        private readonly IRabbitMqService _producer;
+        private readonly ICreditClientProducer _producer;
         private readonly ILogger<InsertClientsUseCase> _logger;
 
-        public InsertClientsUseCase(IRabbitMqService messageProducer, ILogger<InsertClientsUseCase> logger)
+        public InsertClientsUseCase(ICreditClientProducer messageProducer, ILogger<InsertClientsUseCase> logger)
         {
             _producer = messageProducer;
             _logger = logger;
@@ -21,7 +20,7 @@ namespace Domain.UseCases.InsertClientsUseCases
         {
             try
             {
-                _logger.LogInformation("{Class} | Inserting Data on database | CorrelationId: {CorrelationId}",
+                _logger.LogInformation("{Class} | Inserting client on database | CorrelationId: {CorrelationId}",
                   nameof(InsertClientsUseCase),
                   input.CorrelationId);
 
@@ -33,7 +32,7 @@ namespace Domain.UseCases.InsertClientsUseCases
 
                 _producer.ProducerMessage(input);
 
-                return "Mensagem enviada com sucesso!";
+                return "";
             }
             catch (Exception ex)
             {

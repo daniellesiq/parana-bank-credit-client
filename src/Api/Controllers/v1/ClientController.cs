@@ -13,14 +13,14 @@ namespace parana_bank_credit_client.Controllers.v1
     public class ClientController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IRabbitMqService _producer;
+        private readonly ICreditClientProducer _producer;
 
-        public ClientController(IMediator mediator, IRabbitMqService messageProducer)
+        public ClientController(IMediator mediator, ICreditClientProducer messageProducer)
         {
             _mediator = mediator;
             _producer = messageProducer;
         }
-
+        
         [HttpGet]
         [SwaggerOperation(Summary = "Get Clients", Description = "Get clients by Id")]
         [ProducesResponseType(StatusCodes.Status200OK)]

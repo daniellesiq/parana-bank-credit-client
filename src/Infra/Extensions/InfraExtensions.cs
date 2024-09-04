@@ -9,7 +9,7 @@ namespace Infra.Extensions
     {
         public static IServiceCollection AddProducers(this IServiceCollection services)
         {
-            services.AddScoped<IRabbitMqService, RabbitMqService>();
+            services.AddScoped<ICreditClientProducer, CreditClientProducer>();
             services.AddSingleton<ConnectionFactory>(new ConnectionFactory { HostName = "localhost" });
 
             return services;

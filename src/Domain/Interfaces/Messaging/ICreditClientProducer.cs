@@ -1,8 +1,7 @@
 ﻿namespace Domain.Interfaces.Messaging
 {
-    public interface IRabbitMqService
+    public interface ICreditClientProducer
     {
         void ProducerMessage<T>(T message);
-        string ReceiveMessage();
     }
 }
