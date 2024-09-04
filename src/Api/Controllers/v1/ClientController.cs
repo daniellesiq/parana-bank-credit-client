@@ -35,7 +35,7 @@ namespace parana_bank_credit_client.Controllers.v1
 
         [HttpPost]
         [SwaggerOperation(Summary = "Insert Clients", Description = "Insert new client")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> SendNewClientAsync([FromBody] InsertClientInput input, CancellationToken cancellationToken)

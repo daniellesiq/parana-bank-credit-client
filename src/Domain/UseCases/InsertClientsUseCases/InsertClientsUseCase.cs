@@ -2,6 +2,7 @@
 using Domain.Interfaces.Messaging;
 using Domain.UseCases.InsertClientsUseCases.Boundaries;
 using Microsoft.Extensions.Logging;
+using Domain.UseCases.InsertClientsUseCases.Mappers;
 
 namespace Domain.UseCases.InsertClientsUseCases
 {
@@ -30,13 +31,15 @@ namespace Domain.UseCases.InsertClientsUseCases
                  nameof(InsertClientsUseCase),
                  input.CorrelationId);
 
-                _producer.ProducerMessage(input);
+                var message = ClientMappers.InputToMessage(input);
+
+                _producer.ProducerMessage(message);
 
                 return "";
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao produzir mensagem");
+                _logger.LogError(ex, "Error");
                 throw;
             }
         }
