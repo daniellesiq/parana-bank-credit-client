@@ -8,6 +8,7 @@ namespace Domain.UseCases.InsertClientsUseCases.Mappers
         {
             return new ClientOfferMessage
             (
+                input.CorrelationId,
                 input.Client.Document,
                 input.Client.Income,
                 input.Client.Rating,
