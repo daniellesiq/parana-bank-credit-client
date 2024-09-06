@@ -6,7 +6,7 @@
             Guid correlationId,
             long document,
             decimal income,
-            string score,
+            int score,
             string account)
         {
             CorrelationId = correlationId;
@@ -19,7 +19,7 @@
         public Guid CorrelationId { get; init; } = default!;
         public long Document { get; init; } = default!;
         public decimal Income { get; init; } = default!;
-        public string Score { get; init; } = default!;
+        public int Score { get; init; } = default!;
         public string Account { get; init; } = default!;
     }
 }
