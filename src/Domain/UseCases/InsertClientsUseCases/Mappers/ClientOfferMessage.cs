@@ -6,20 +6,20 @@
             Guid correlationId,
             long document,
             decimal income,
-            string rating,
+            string score,
             string account)
         {
             CorrelationId = correlationId;
             Document = document;
             Income = income;
-            Rating = rating;
+            Score = score;
             Account = account;
         }
 
         public Guid CorrelationId { get; init; } = default!;
         public long Document { get; init; } = default!;
         public decimal Income { get; init; } = default!;
-        public string Rating { get; init; } = default!;
+        public string Score { get; init; } = default!;
         public string Account { get; init; } = default!;
     }
 }

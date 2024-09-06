@@ -11,7 +11,7 @@ namespace Domain.UseCases.InsertClientsUseCases.Mappers
                 input.CorrelationId,
                 input.Client.Document,
                 input.Client.Income,
-                input.Client.Rating,
+                input.Client.Score,
                 input.Client.Account
             );
         }
