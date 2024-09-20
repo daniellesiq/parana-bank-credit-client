@@ -1,7 +1,5 @@
-using Domain.Interfaces.Messaging;
-using Domain.UseCases.GetClientsUseCases.Boundaries;
 using Domain.UseCases.InsertClientsUseCases.Boundaries;
-using MediatR;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -12,25 +10,13 @@ namespace parana_bank_credit_client.Controllers.v1
     [Route("api/v{version:apiVersion}/")]
     public class ClientController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly ICreditClientProducer _producer;
+        private readonly ILogger<ClientController> _logger;
+        private readonly IBus _bus;
 
-        public ClientController(IMediator mediator, ICreditClientProducer messageProducer)
+        public ClientController(ILogger<ClientController> logger, IBus bus)
         {
-            _mediator = mediator;
-            _producer = messageProducer;
-        }
-        
-        [HttpGet]
-        [SwaggerOperation(Summary = "Get Clients", Description = "Get clients by Id")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetClientByIdAsync(int clientId, Guid correlationId, CancellationToken cancellationToken)
-        {
-            var result = await _mediator.Send(new GetClientsInput(clientId, correlationId), cancellationToken);
-
-            return Ok(result);
+            _logger = logger;
+            _bus = bus;
         }
 
         [HttpPost]
@@ -40,9 +26,14 @@ namespace parana_bank_credit_client.Controllers.v1
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> SendNewClientAsync([FromBody] InsertClientInput input, CancellationToken cancellationToken)
         {
-            await _mediator.Send(input, cancellationToken);
+            if (input != null)
+            {
+                var sendEnpoint = await _bus.GetSendEndpoint(new Uri("queue:bank-credit-offer"));
+                await sendEnpoint.Send(input);
 
-            return Created();
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

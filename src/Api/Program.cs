@@ -1,4 +1,4 @@
-using Domain.UseCases.GetClientsUseCases.Boundaries;
+using Domain.UseCases.InsertClientsUseCases.Boundaries;
 using Infra.Extensions;
 using parana_bank_credit_client.Extensions;
 
@@ -15,9 +15,10 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddSwaggerOptions();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetClientsInput).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(InsertClientInput).Assembly));
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddProducers();
+
+builder.Services.AddMassTransitExtension(configuration);
 
 var app = builder.Build();
 

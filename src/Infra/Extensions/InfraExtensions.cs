@@ -1,18 +1,21 @@
-﻿using Domain.Interfaces.Messaging;
-using Infra.Messaging.Producers;
+﻿using MassTransit;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RabbitMQ.Client;
 
 namespace Infra.Extensions
 {
     public static class InfraExtensions
     {
-        public static IServiceCollection AddProducers(this IServiceCollection services)
+        public static void AddMassTransitExtension(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<ICreditClientProducer, CreditClientProducer>();
-            services.AddSingleton<ConnectionFactory>(new ConnectionFactory { HostName = "localhost" });
+            services.AddMassTransit(bus =>
+            {
+                bus.UsingRabbitMq((ctx, busConfigurator) =>
+                {
+                    busConfigurator.Host(configuration.GetConnectionString("RabbitMq"));
+                });
+            });
 
-            return services;
         }
     }
 }
