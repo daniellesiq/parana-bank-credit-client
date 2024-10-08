@@ -1,4 +1,4 @@
-﻿namespace Domain.UseCases.InsertClientsUseCases.Boundaries
+﻿namespace Domain.Entities
 {
     public record Address
     {

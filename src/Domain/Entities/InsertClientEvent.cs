@@ -1,10 +1,8 @@
-﻿using MediatR;
-
-namespace Domain.UseCases.InsertClientsUseCases.Boundaries
+﻿namespace Domain.Entities
 {
-    public record InsertClientInput : IRequest<string>
+    public record InsertClientEvent
     {
-        public InsertClientInput(Client client, Guid correlationId)
+        public InsertClientEvent(Client client, Guid correlationId)
         {
             CorrelationId = Guid.NewGuid();
             Client = client;

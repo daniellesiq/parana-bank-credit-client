@@ -1,4 +1,5 @@
-using Domain.UseCases.InsertClientsUseCases.Boundaries;
+using Domain.Entities;
+using Domain.Mappers;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -11,25 +12,26 @@ namespace parana_bank_credit_client.Controllers.v1
     public class ClientController : ControllerBase
     {
         private readonly ILogger<ClientController> _logger;
-        private readonly IBus _bus;
+        private readonly IPublishEndpoint _publisher;
 
-        public ClientController(ILogger<ClientController> logger, IBus bus)
+        public ClientController(ILogger<ClientController> logger, IPublishEndpoint publisher)
         {
             _logger = logger;
-            _bus = bus;
+            _publisher = publisher;
         }
 
         [HttpPost]
         [SwaggerOperation(Summary = "Insert Clients", Description = "Insert new client")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> SendNewClientAsync([FromBody] InsertClientInput input, CancellationToken cancellationToken)
+        public async Task<IActionResult> SendNewClientAsync([FromBody] InsertClientEvent input, CancellationToken cancellationToken)
         {
             if (input != null)
             {
-                var sendEnpoint = await _bus.GetSendEndpoint(new Uri("queue:bank-credit-offer"));
-                await sendEnpoint.Send(input);
+                var message = ClientMappers.InputToMessage(input);
+
+                await _publisher.Publish(message, cancellationToken);
 
                 return Ok();
             }

@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using Domain.UseCases.InsertClientsUseCases.Mappers;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,12 +11,22 @@ namespace Infra.Extensions
         {
             services.AddMassTransit(bus =>
             {
-                bus.UsingRabbitMq((ctx, busConfigurator) =>
+                bus.UsingRabbitMq((ctx, cfg) =>
                 {
-                    busConfigurator.Host(configuration.GetConnectionString("RabbitMq"));
+                    cfg.Host(configuration.GetConnectionString("RabbitMq"));
+
+                    cfg.Message<ClientOfferMessage>(e =>
+                    {
+                        e.SetEntityName("bank-credit-offer");
+                    });
+
+                    cfg.Publish<ClientOfferMessage>(e =>
+                    {
+                        e.ExchangeType = "topic";
+                    });
+
                 });
             });
-
         }
     }
 }

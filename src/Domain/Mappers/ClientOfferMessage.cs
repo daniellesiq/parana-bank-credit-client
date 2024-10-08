@@ -1,4 +1,4 @@
-﻿namespace Domain.UseCases.InsertClientsUseCases.Mappers
+﻿namespace Domain.Mappers
 {
     public record ClientOfferMessage
     {

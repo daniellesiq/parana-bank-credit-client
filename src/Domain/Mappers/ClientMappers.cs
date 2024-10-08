@@ -1,10 +1,10 @@
-﻿using Domain.UseCases.InsertClientsUseCases.Boundaries;
+﻿using Domain.Entities;
 
-namespace Domain.UseCases.InsertClientsUseCases.Mappers
+namespace Domain.Mappers
 {
     public static class ClientMappers
     {
-        public static ClientOfferMessage InputToMessage(InsertClientInput input)
+        public static ClientOfferMessage InputToMessage(InsertClientEvent input)
         {
             return new ClientOfferMessage
             (
