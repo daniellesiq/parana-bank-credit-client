@@ -1,8 +1,8 @@
-﻿namespace Domain.Entities
+﻿namespace Domain.Entity
 {
-    public record InsertClientEvent
+    public record InsertClientInput
     {
-        public InsertClientEvent(Client client, Guid correlationId)
+        public InsertClientInput(Client client, Guid correlationId)
         {
             CorrelationId = Guid.NewGuid();
             Client = client;

@@ -1,8 +1,8 @@
-﻿namespace Domain.Mappers
+﻿namespace Domain.Events
 {
-    public record ClientOfferMessage
+    public record ClientOfferEvent
     {
-        public ClientOfferMessage(
+        public ClientOfferEvent(
             Guid correlationId,
             long document,
             decimal income,

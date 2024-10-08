@@ -1,4 +1,4 @@
-using Domain.Entities;
+using Domain.Entity;
 using Domain.Mappers;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
@@ -25,13 +25,15 @@ namespace parana_bank_credit_client.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> SendNewClientAsync([FromBody] InsertClientEvent input, CancellationToken cancellationToken)
+        public async Task<IActionResult> SendNewClientAsync([FromBody] InsertClientInput input, CancellationToken cancellationToken)
         {
             if (input != null)
             {
-                var message = ClientMappers.InputToMessage(input);
+                var message = ClientMappers.InputToEvent(input);
 
                 await _publisher.Publish(message, cancellationToken);
+
+                _logger.LogInformation($"Sent event | Document: {message.Document}");
 
                 return Ok();
             }

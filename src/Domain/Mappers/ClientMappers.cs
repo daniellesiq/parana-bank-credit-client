@@ -1,12 +1,13 @@
-﻿using Domain.Entities;
+﻿using Domain.Entity;
+using Domain.Events;
 
 namespace Domain.Mappers
 {
     public static class ClientMappers
     {
-        public static ClientOfferMessage InputToMessage(InsertClientEvent input)
+        public static ClientOfferEvent InputToEvent(InsertClientInput input)
         {
-            return new ClientOfferMessage
+            return new ClientOfferEvent
             (
                 input.CorrelationId,
                 input.Client.Document,
