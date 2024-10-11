@@ -11,7 +11,8 @@ namespace Domain.Mappers
             (
                 input.CorrelationId,
                 input.Client.Document,
-                input.Client.Income
+                input.Client.Income,
+                input.Client.Score
             );
         }
     }

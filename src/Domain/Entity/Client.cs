@@ -12,6 +12,7 @@
         public string Email { get; init; } = default!;
         public string Job { get; init; } = default!;
         public decimal Income { get; init; } = default!;
+        public int Score { get; init; } = default!;
         public DateTime CreateAt { get; init; } = DateTime.Now;
     }
 }
