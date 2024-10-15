@@ -1,5 +1,6 @@
 using Domain.Events;
 using MassTransit;
+using Worker.Definitions;
 using Worker.Message;
 
 var configuration = new ConfigurationBuilder()
@@ -17,7 +18,7 @@ var host = Host.CreateDefaultBuilder(args)
         collection.AddMassTransit(x =>
         {
             x.AddDelayedMessageScheduler();
-            x.AddConsumer<ClientConsumer>();
+            x.AddConsumer<ClientConsumer>(typeof(ClientConsumerDefinition));
             x.AddRequestClient<CreditCardValidatedEvent>();
 
             x.SetKebabCaseEndpointNameFormatter();
@@ -26,6 +27,7 @@ var host = Host.CreateDefaultBuilder(args)
             {
                 cfg.Durable = true;
                 cfg.AutoDelete = false;
+
                 cfg.Host(context.Configuration.GetConnectionString("RabbitMq"));
                 cfg.UseDelayedMessageScheduler();
                 cfg.ServiceInstance(instance =>

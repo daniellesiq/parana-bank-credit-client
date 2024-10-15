@@ -12,13 +12,14 @@ namespace Worker.Message
             _logger = logger;
         }
 
-        public async Task Consume(ConsumeContext<CreditCardValidatedEvent> context)
+        public Task Consume(ConsumeContext<CreditCardValidatedEvent> context)
         {
             var correlationId = context.Message.CorrelationId;
             try
             {
                 _logger.LogInformation($"Event received: {nameof(ClientConsumer)}: {correlationId} ");
 
+                return Task.CompletedTask;
             }
             catch (Exception ex)
             {

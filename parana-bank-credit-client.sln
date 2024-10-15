@@ -5,14 +5,14 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "src\Api\Api.csproj", "{16B351AE-664F-40EF-9AFB-9F55F4EEB4CF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\Domain.csproj", "{BBA07D48-3981-4747-95DA-E49D79CFFCA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\Core\Core.csproj", "{BBA07D48-3981-4747-95DA-E49D79CFFCA1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C7E0B393-1863-4F54-9011-B585A4BF0430}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worker", "src\Worker\Worker.csproj", "{1B0249CD-3173-4B92-99A8-34A8F7FD1B0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker", "src\Worker\Worker.csproj", "{1B0249CD-3173-4B92-99A8-34A8F7FD1B0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
