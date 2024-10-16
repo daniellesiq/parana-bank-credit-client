@@ -24,7 +24,6 @@ namespace parana_bank_credit_client.Configurations
             var info = new OpenApiInfo()
             {
                 Title = "parana-bank-credit-client",
-                Version = description.ApiVersion.ToString(),
                 Description = "API Client",
             };
 
