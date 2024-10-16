@@ -4,3 +4,4 @@
 - Swashbuckle Swagger
 - RabbitMQ
 - MassTransit
+- Docker
