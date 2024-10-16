@@ -14,10 +14,9 @@ namespace Worker.Message
 
         public Task Consume(ConsumeContext<CreditCardValidatedEvent> context)
         {
-            var correlationId = context.Message.CorrelationId;
             try
             {
-                _logger.LogInformation($"Event received: {nameof(ClientConsumer)}: {correlationId} ");
+                _logger.LogInformation($"Event received: {nameof(ClientConsumer)} | CorrelationId: {context.Message.CorrelationId} ");
 
                 return Task.CompletedTask;
             }

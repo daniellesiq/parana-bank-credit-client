@@ -33,7 +33,7 @@ namespace parana_bank_credit_client.Controllers.v1
 
                 await _publisher.Publish(message, cancellationToken);
 
-                _logger.LogInformation($"Sent event | Document: {message.Document}");
+                _logger.LogInformation($"Sent event | CorrelationId: {message.CorrelationId} | Document: {message.Document}");
 
                 return Ok();
             }
