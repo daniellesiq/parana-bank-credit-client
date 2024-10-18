@@ -16,7 +16,11 @@ namespace Worker.Message
         {
             try
             {
-                _logger.LogInformation($"Event received: {nameof(ClientConsumer)} | CorrelationId: {context.Message.CorrelationId} ");
+                _logger.LogInformation("Event received: {Class} | CorrelationId: {CorrelationId} | Document: {Document} | Limit: {CreditLimit}",
+                    nameof(ClientConsumer),
+                    context.Message.CorrelationId,
+                    context.Message.Document,
+                    context.Message.CreditLimit);
 
                 return Task.CompletedTask;
             }

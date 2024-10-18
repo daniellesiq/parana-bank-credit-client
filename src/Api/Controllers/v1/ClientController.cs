@@ -21,7 +21,7 @@ namespace parana_bank_credit_client.Controllers.v1
         }
 
         [HttpPost]
-        [SwaggerOperation(Summary = "Insert Clients", Description = "Insert new client")]
+        [SwaggerOperation(Summary = "Insert Client", Description = "Insert new client")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -33,7 +33,9 @@ namespace parana_bank_credit_client.Controllers.v1
 
                 await _publisher.Publish(message, cancellationToken);
 
-                _logger.LogInformation($"Sent event | CorrelationId: {message.CorrelationId} | Document: {message.Document}");
+                _logger.LogInformation("Sent event: CorrelationId: {CorrelationId} | Document: {Document}",
+                    message.CorrelationId,
+                    message.Document);
 
                 return Ok();
             }
