@@ -2,13 +2,7 @@
 {
     public record InsertClientInput
     {
-        public InsertClientInput(Client client, Guid correlationId)
-        {
-            CorrelationId = Guid.NewGuid();
-            Client = client;
-        }
-
-        public Guid CorrelationId { get; init; }
-        public Client Client { get; init; }
+        public Guid CorrelationId { get; init; } = Guid.NewGuid();
+        public Client Client { get; init; } = default!;
     }
 }
