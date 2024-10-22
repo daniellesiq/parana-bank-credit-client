@@ -57,9 +57,10 @@ namespace UnitTests
 
             _contextMock.SetupGet(x => x.Message).Throws(new Exception("Error"));
 
-            // Act & Assert
+            // Act
             await Assert.ThrowsAsync<Exception>(() => consumer.Consume(_contextMock.Object));
 
+            // Assert
             _loggerMock.Verify(
                  logger => logger.Log(
                      It.Is<LogLevel>(logLevel => logLevel == LogLevel.Error),
