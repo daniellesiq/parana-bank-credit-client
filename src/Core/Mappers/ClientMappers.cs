@@ -7,13 +7,14 @@ namespace Domain.Mappers
     {
         public static ClientOfferEvent InputToEvent(InsertClientInput input)
         {
-            return new ClientOfferEvent
-            (
-                input.CorrelationId,
-                input.Client.Document,
-                input.Client.Income,
-                input.Client.Score
-            );
+            var clientOfferEvent = new ClientOfferEvent
+            {
+                CorrelationId = input.CorrelationId,
+                Document = input.Client.Document,
+                Income = input.Client.Income,
+                Score = input.Client.Score
+            };
+            return clientOfferEvent;
         }
     }
 }

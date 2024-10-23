@@ -4,7 +4,7 @@ using Domain.Mappers;
 
 namespace UnitTests
 {
-    public class ClientMappersTests
+    public class ClientMappersUnitTest
     {
         [Fact]
         public async Task Given_InputToEvent_ReturnsExpectedClientOfferEvent()

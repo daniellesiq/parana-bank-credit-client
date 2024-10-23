@@ -7,13 +7,13 @@ using Worker.Message;
 
 namespace UnitTests
 {
-    public class ClientConsumerTest
+    public class ClientConsumerUnitTest
     {
         private readonly Mock<ILogger<ClientConsumer>> _loggerMock;
         private readonly Mock<ConsumeContext<CreditCardValidatedEvent>> _contextMock;
         private readonly ClientConsumer _consumer;
 
-        public ClientConsumerTest()
+        public ClientConsumerUnitTest()
         {
             _loggerMock = new Mock<ILogger<ClientConsumer>>();
             _contextMock = new Mock<ConsumeContext<CreditCardValidatedEvent>>();
@@ -30,7 +30,7 @@ namespace UnitTests
                 .RuleFor(c => c.Income, 1000m)
                 .RuleFor(c => c.Score, 500)
                 .RuleFor(c => c.CreditLimit, 10000)
-                .RuleFor(c => c.CreditCardNumber, 1234567895247893)
+                .RuleFor(c => c.CreditCardNumber, "1234567895247893")
                 .Generate();
 
             _contextMock.SetupGet(x => x.Message).Returns(eventFake);
